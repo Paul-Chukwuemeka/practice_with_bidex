@@ -19,14 +19,19 @@ export default function Home() {
         </div>
       </Link>
       <Link href={"/image_slider"}>
-      <button className="p-4 bg-red-300 rounded-lg font-semibold text-xl hover:scale-110 hover:bg-red-500 hover:text-white">
-        Image Slider
-      </button>
+        <button className="p-4 bg-red-300 rounded-lg font-semibold text-xl hover:scale-110 hover:bg-red-500 hover:text-white">
+          Image Slider
+        </button>
       </Link>
       <Link href={"/autoSlide"}>
-      <button className="p-4 bg-amber-300 rounded-xl text-xl font-semibold hover:scale-110 hover:bg-amber-500 hover:text-white">
-        AutoSlide
-      </button>
+        <button className="p-4 bg-amber-300 rounded-xl text-xl font-semibold hover:scale-110 hover:bg-amber-500 hover:text-white">
+          AutoSlide
+        </button>
+      </Link>
+      <Link href={"/music-player"}>
+        <button className="p-4 bg-purple-300 rounded-xl text-xl font-semibold hover:scale-110 hover:bg-purple-500 hover:text-white">
+          Music Player
+        </button>
       </Link>
     </div>
   );

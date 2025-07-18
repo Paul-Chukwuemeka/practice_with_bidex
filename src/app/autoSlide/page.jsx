@@ -1,9 +1,10 @@
 "use client";
-import React from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import ReturnBtn from "../components/ReturnBtn";
 
-const Page = () => {
+const page = () => {
+  const [pos, setPos] = useState(0);
   const imageArr = [
     "https://fastly.picsum.photos/id/217/800/400.jpg?hmac=5pdOxYZkceQGbQDvRvOginGMWeG2uAIQtpxvC7QCadQ",
     "https://fastly.picsum.photos/id/324/800/400.jpg?hmac=2mg8hcRfd1s1--TEoZBwlIv47YDd0Laxvb7jcvxdLHw",
@@ -16,40 +17,38 @@ const Page = () => {
     "https://fastly.picsum.photos/id/356/800/400.jpg?hmac=r99YYxoFbrKLFr9w08dNXfRZv8yjNa0E6svuL9VYGKg",
     "https://fastly.picsum.photos/id/924/800/400.jpg?hmac=kK6jMUpWy_qdrgRS3okDi53hovmaA0Xdfaec7E2MSHA",
     "https://fastly.picsum.photos/id/788/800/400.jpg?hmac=jWWvDHy4-7OjzsyvT7VJGfhlGmhavtwZgTC1FmQpd7w",
+    "https://fastly.picsum.photos/id/217/800/400.jpg?hmac=5pdOxYZkceQGbQDvRvOginGMWeG2uAIQtpxvC7QCadQ",
   ];
-  const [position, setPosition] = useState(0);
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setPosition((prevPosition) => (prevPosition + 800) % (imageArr.length * 800));
-    }, 2000);
 
-    return () => clearInterval(interval);
-  }, [imageArr.length]);
+  useEffect(() => {
+    setInterval(() => {
+      setPos((prev) => (prev + 800) % (imageArr.length * 800));
+    }, 3000);
+  },[]);
 
   return (
-    <div className="w-full h-screen flex flex-col items-center p-20 gap-20 ">
-      <h1 className="text-2xl font-semibold">AutoSlide</h1>
-      <div className="flex w-[800px] border overflow-hidden">
+    <div className="flex gap-10 flex-col items-center p-20">
+      <ReturnBtn/>
+      <h1 className="text-3xl font-bold">Auto slider</h1>
+      <div className="border w-[800px] h-[400px] overflow-hidden">
         <div
-          className={`flex  duration-500 ease-out w-[8800px] outline-4 outline-red-600`}
-          style={{ transform: `translateX(-${position}px)` }}
+          className={`flex border ${pos === 0 ? "duration-0" :"duration-750"} w-[8800px] shrink-0`}
+          style={{ translate: `-${pos}px` }}
         >
-          {imageArr.map((img, index) => {
-            return (
-              <Image
-                src={img}
-                key={index}
-                width={800}
-                height={400}
-                className="w-[800px] shrink-0"
-                alt="Autoslide image"
-              />
-            );
-          })}
+          {imageArr.map((img, i) => (
+            <Image
+              className="shrink-0"
+              src={img}
+              key={i}
+              width={800}
+              alt={i}
+              height={400}
+            />
+          ))}
         </div>
       </div>
     </div>
   );
 };
 
-export default Page;
+export default page;
